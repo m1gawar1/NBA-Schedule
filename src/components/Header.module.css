@@ -63,3 +63,14 @@
   color: var(--text);
   border-color: var(--border-dim);
 }
+
+.navSample {
+  color: var(--accent-alt);
+  border-color: transparent;
+  opacity: 0.7;
+}
+
+.navSample:hover {
+  border-color: var(--accent-alt);
+  opacity: 1;
+}
