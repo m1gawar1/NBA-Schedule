@@ -1,0 +1,134 @@
+.header {
+  padding: 2.5rem 0 2rem;
+  border-bottom: 2px solid var(--border-dim);
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* ─── Sections ─── */
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 4rem;
+}
+
+.section {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border-dim);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.note {
+  border-bottom: none;
+  opacity: 0.7;
+}
+
+/* ─── Section header ─── */
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-top: 0.1rem;
+}
+
+.num {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ─── Body ─── */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.body p {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.body strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.list li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.list :global(kbd) {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 680px) {
+  .section {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}

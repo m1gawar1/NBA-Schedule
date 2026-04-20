@@ -12,7 +12,7 @@ export default function Header() {
         </Link>
         <div className={styles.right}>
           <nav className={styles.nav}>
-            <Link href="/schedule" className={styles.navLink}>週間日程</Link>
+            <Link href="/how-to" className={styles.navLink}>使い方</Link>
           </nav>
           <ThemeToggle />
         </div>
