@@ -1,17 +1,18 @@
 .card {
   background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 0;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   position: relative;
-  transition: border-color 0.2s;
+  transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0px var(--accent-yellow);
 }
 
 .compact {
@@ -21,43 +22,49 @@
 
 .playoffBadge {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: linear-gradient(135deg, #ff6b35, #ff9500);
+  top: -1px;
+  right: -1px;
+  background: var(--accent-pink);
   color: #fff;
   font-size: 0.6rem;
   font-family: "Orbitron", sans-serif;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.1em;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0;
+  border-left: var(--border-width) solid #fff;
+  border-bottom: var(--border-width) solid #fff;
 }
 
 .liveBadge {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: #e03a3e;
+  top: -1px;
+  right: -1px;
+  background: var(--accent-pink);
   color: #fff;
   font-size: 0.6rem;
   font-family: "Orbitron", sans-serif;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.1em;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  animation: pulse 1.5s infinite;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0;
+  border-left: var(--border-width) solid #fff;
+  border-bottom: var(--border-width) solid #fff;
+  animation: pulse 1.2s infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.4; }
 }
 
 .datetime {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
+  font-size: 0.78rem;
+  color: var(--accent-yellow);
   margin: 0;
+  font-weight: 700;
   letter-spacing: 0.04em;
+  font-family: "Orbitron", sans-serif;
 }
 
 .matchup {
@@ -71,6 +78,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .awayTeam {
@@ -98,6 +106,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  min-width: 0;
 }
 
 .teamName {
@@ -106,21 +115,22 @@
   font-weight: 700;
   color: var(--text-primary);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.15s;
   line-height: 1.2;
   letter-spacing: 0.05em;
   white-space: nowrap;
 }
 
 .teamName:hover {
-  color: var(--accent-blue);
+  color: var(--accent-yellow);
 }
 
 .homeAwayLabel {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-family: "Orbitron", sans-serif;
   color: var(--text-secondary);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -129,21 +139,25 @@
   align-items: center;
   justify-content: center;
   min-width: 64px;
+  flex-shrink: 0;
 }
 
 .atSign {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-secondary);
   font-family: "Orbitron", sans-serif;
+  font-weight: 700;
 }
 
 .score {
   font-family: "Orbitron", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--accent-yellow);
   letter-spacing: 0.05em;
   white-space: nowrap;
+  border: 1px solid var(--accent-yellow);
+  padding: 0.2rem 0.5rem;
 }
 
 .gameScore {
@@ -154,11 +168,13 @@
 }
 
 .winner {
-  color: var(--accent-orange);
+  color: var(--accent-green);
 }
 
 .arena {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
   margin: 0;
+  border-left: 2px solid #444;
+  padding-left: 0.5rem;
 }

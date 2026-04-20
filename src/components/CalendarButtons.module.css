@@ -8,42 +8,49 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.45rem 0.9rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  border: none;
-  transition: opacity 0.2s, transform 0.15s;
+  border: var(--border-width) solid var(--border-color);
+  transition: transform 0.12s, box-shadow 0.12s;
   white-space: nowrap;
-  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .btn:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
+  transform: translate(-2px, -2px);
 }
 
 .btn:active {
-  transform: translateY(0);
+  transform: translate(0, 0);
+  box-shadow: none !important;
 }
 
 .google {
-  background: #4285f4;
+  background: var(--accent-blue);
   color: #fff;
+  border-color: var(--accent-blue);
+}
+
+.google:hover {
+  box-shadow: 4px 4px 0px var(--accent-yellow);
 }
 
 .ics {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--accent-green);
+  border-color: var(--accent-green);
 }
 
 .ics:hover {
-  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 4px 4px 0px var(--accent-green);
 }
 
 .count {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   opacity: 0.8;
 }
