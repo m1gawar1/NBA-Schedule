@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLogoUrl, getTeamById } from "@/lib/teams";
-import { formatJSTTime, isPlayoff } from "@/lib/utils";
+import { formatJSTTime, isPlayoff, isTBD } from "@/lib/utils";
 import CalendarButtons from "./CalendarButtons";
 import styles from "./WeekSchedule.module.css";
 
@@ -62,13 +62,16 @@ function WeekGameCard({ game }) {
   const playoff = isPlayoff(game.gameId);
   const isFinished = game.gameStatus === 3;
   const isLive = game.gameStatus === 2;
+  const tbd = isTBD(game);
 
   return (
     <div className={`${styles.gameCard} ${isLive ? styles.liveCard : ""}`}>
       {playoff && <span className={styles.playoffBadge}>PO</span>}
       {isLive && <span className={styles.liveDot} />}
 
-      <p className={styles.gameTime}>{formatJSTTime(game.gameDateTimeUTC)}</p>
+      <p className={`${styles.gameTime} ${tbd ? styles.tbdTime : ""}`}>
+        {tbd ? "時間未定" : formatJSTTime(game.gameDateTimeUTC)}
+      </p>
 
       <div className={styles.teams}>
         <TeamChip team={game.awayTeam} info={awayInfo} isWinner={isFinished && game.awayTeam.score > game.homeTeam.score} />

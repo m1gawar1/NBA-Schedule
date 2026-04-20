@@ -143,6 +143,11 @@
   50%       { opacity: 0.4; transform: scale(0.8); }
 }
 
+.tbdTime {
+  color: var(--text-muted) !important;
+  font-style: italic;
+}
+
 .gameTime {
   font-family: "Orbitron", sans-serif;
   font-size: 0.72rem;

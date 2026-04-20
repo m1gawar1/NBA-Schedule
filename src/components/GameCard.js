@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLogoUrl, getTeamById } from "@/lib/teams";
-import { formatJSTFull, isPlayoff } from "@/lib/utils";
+import { formatJSTFull, formatJSTDateOnly, isPlayoff, isTBD } from "@/lib/utils";
 import CalendarButtons from "./CalendarButtons";
 import styles from "./GameCard.module.css";
 
@@ -12,13 +12,22 @@ export default function GameCard({ game, compact = false }) {
 
   const isFinished = game.gameStatus === 3;
   const isLive = game.gameStatus === 2;
+  const tbd = isTBD(game);
 
   return (
-    <div className={`${styles.card} ${compact ? styles.compact : ""}`}>
-      {playoff && <span className={styles.playoffBadge}>PLAYOFFS</span>}
+    <div className={`${styles.card} ${compact ? styles.compact : ""} ${tbd ? styles.tbdCard : ""}`}>
+      {playoff && !tbd && <span className={styles.playoffBadge}>PLAYOFFS</span>}
+      {playoff &&  tbd && <span className={styles.playoffBadge}>PLAYOFFS</span>}
       {isLive && <span className={styles.liveBadge}>LIVE</span>}
 
-      <p className={styles.datetime}>{formatJSTFull(game.gameDateTimeUTC)}</p>
+      {tbd ? (
+        <p className={styles.datetime}>
+          {formatJSTDateOnly(game.gameDateTimeUTC)}
+          <span className={styles.tbdBadge}>時間未定</span>
+        </p>
+      ) : (
+        <p className={styles.datetime}>{formatJSTFull(game.gameDateTimeUTC)}</p>
+      )}
 
       <div className={styles.matchup}>
         <TeamSide team={game.awayTeam} teamInfo={awayTeamInfo} isFinished={isFinished} isHome={false} />

@@ -84,3 +84,31 @@ export function getJSTYearMonth(utcDateString) {
 export function isPlayoff(gameId) {
   return gameId.startsWith("004");
 }
+
+/**
+ * 時間未定（TBD）かどうか判定
+ * - gameStatusText が "TBD" / "time-tbd" を含む場合
+ * - gameDateTimeUTC が UTC 0:00:00（時刻プレースホルダー）の場合
+ */
+export function isTBD(game) {
+  const statusText = (game.gameStatusText || "").toLowerCase();
+  if (statusText.includes("tbd")) return true;
+  // 深夜0時UTCは「時間未定」の慣例的な仮置き値
+  if (game.gameDateTimeUTC?.endsWith("T00:00:00Z")) return true;
+  return false;
+}
+
+/**
+ * TBD用の日付表示（時刻なし）
+ * 例: "2026年4月27日（月）"
+ */
+export function formatJSTDateOnly(utcDateString) {
+  const date = new Date(utcDateString);
+  return date.toLocaleDateString("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "short",
+  });
+}
