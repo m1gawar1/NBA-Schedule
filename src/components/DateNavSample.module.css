@@ -54,7 +54,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  position: relative;
   padding: 0 1.1rem;
   height: 56px;
   background: var(--bg-card);
@@ -75,6 +76,8 @@
 }
 
 .calIcon {
+  position: absolute;
+  right: 1.1rem;
   flex-shrink: 0;
   opacity: 0.55;
   transition: opacity 0.15s;
