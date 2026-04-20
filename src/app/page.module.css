@@ -1,31 +1,43 @@
 .hero {
-  padding: 3.5rem 0 2.5rem;
-  border-bottom: var(--border-width) solid var(--border-color);
+  padding: 3.5rem 0 3rem;
   margin-bottom: 2.5rem;
+  border-bottom: 2px solid var(--border-dim);
+}
+
+.heroEyebrow {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
 }
 
 .heroTitle {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
-  color: var(--accent-yellow);
-  line-height: 1.1;
-  margin-bottom: 0.75rem;
-  text-shadow: 4px 4px 0px var(--accent-pink);
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+
+.heroTitle span {
+  color: var(--accent);
 }
 
 .heroSub {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  border-left: 3px solid var(--accent-green);
-  padding-left: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 480px;
 }
 
 .heroSub strong {
-  color: var(--accent-green);
+  color: var(--text);
   font-weight: 700;
 }
 

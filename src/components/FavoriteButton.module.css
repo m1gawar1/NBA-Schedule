@@ -1,26 +1,25 @@
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 1rem;
-  border-radius: 0;
-  border: var(--border-width) solid #444;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border: 2px solid var(--border-dim);
   background: transparent;
-  color: var(--text-secondary);
-  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.7rem;
   font-weight: 700;
   font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.12s, box-shadow 0.12s, color 0.12s, border-color 0.12s;
+  transition: border-color 0.15s, color 0.15s, transform 0.12s, box-shadow 0.12s, background 0.15s;
 }
 
 .btn:hover {
-  border-color: var(--accent-yellow);
-  color: var(--accent-yellow);
+  border-color: var(--accent-alt);
+  color: var(--accent-alt);
   transform: translate(-2px, -2px);
-  box-shadow: 3px 3px 0px var(--accent-yellow);
+  box-shadow: 3px 3px 0 var(--accent-alt);
 }
 
 .btn:active {
@@ -29,13 +28,13 @@
 }
 
 .active {
-  background: var(--accent-yellow);
-  border-color: var(--accent-yellow);
-  color: #000;
+  background: var(--accent-alt);
+  border-color: var(--accent-alt);
+  color: #111;
 }
 
 .active:hover {
-  background: var(--accent-yellow);
-  color: #000;
-  box-shadow: 3px 3px 0px rgba(255,229,0,0.5);
+  background: var(--accent-alt);
+  border-color: var(--accent-alt);
+  color: #111;
 }

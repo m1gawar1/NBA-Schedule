@@ -2,20 +2,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1.25rem 1rem;
+  gap: 0.65rem;
+  padding: 1.1rem 0.75rem;
   background: var(--bg-card);
-  border: var(--border-width) solid var(--border-color);
-  border-radius: 0;
+  border: 2px solid var(--border-dim);
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s, transform 0.12s, box-shadow 0.12s;
   position: relative;
 }
 
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--team-color, var(--accent));
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
 .card:hover {
+  border-color: var(--border);
   transform: translate(-3px, -3px);
-  box-shadow: 5px 5px 0px var(--team-color, var(--accent-yellow));
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.card:hover::after {
+  opacity: 1;
 }
 
 .card:active {
@@ -24,43 +40,37 @@
 }
 
 .logoWrap {
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logo {
-  object-fit: contain;
-}
+.logo { object-fit: contain; }
 
-.info {
-  text-align: center;
-}
+.info { text-align: center; }
 
 .city {
-  font-size: 0.68rem;
-  color: var(--text-secondary);
-  margin: 0 0 0.15rem;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin: 0 0 0.1rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .name {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 0.25rem;
+  color: var(--text);
+  margin: 0 0 0.3rem;
+  line-height: 1.3;
 }
 
 .tricode {
   font-family: "Orbitron", sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  color: var(--team-color, var(--accent-yellow));
-  margin: 0;
+  color: var(--team-color, var(--accent));
   letter-spacing: 0.12em;
-  padding: 0.15rem 0.4rem;
-  border: 1px solid var(--team-color, var(--accent-yellow));
 }

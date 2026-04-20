@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -9,9 +10,9 @@ export default function Header() {
           <span className={styles.logoIcon}>🏀</span>
           <span className={styles.logoText}>NBA Tip-Off Time</span>
         </Link>
-        <nav className={styles.nav}>
-          <Link href="/" className={styles.navLink}>ホーム</Link>
-        </nav>
+        <div className={styles.right}>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

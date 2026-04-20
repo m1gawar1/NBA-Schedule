@@ -11,8 +11,9 @@ export default async function Home() {
     <div className="container">
       {/* Hero */}
       <section className={styles.hero}>
-        <h1 className={styles.heroTitle}>NBA Tip-Off Time</h1>
-        <p className={styles.heroSub}>NBA全チームの試合日程を<strong>日本時間</strong>で確認・Googleカレンダーに追加</p>
+        <p className={styles.heroEyebrow}>2025–26 Season</p>
+        <h1 className={styles.heroTitle}>NBA<br /><span>Tip-Off</span><br />Time</h1>
+        <p className={styles.heroSub}>全30チームの試合日程を<strong>日本時間</strong>で。<br />Googleカレンダーへのワンクリック追加対応。</p>
       </section>
 
       {/* 今日の試合 */}
