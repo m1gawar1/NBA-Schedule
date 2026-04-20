@@ -189,12 +189,10 @@ export default function DateNavSample() {
       </div>
 
       <div className={styles.section}>
-        {/* ─ コントロール行（固定レイアウト） ─ */}
+        {/* ─ ナビ行：< 日付 > を等間隔・中央揃え ─ */}
         <div className={styles.controls}>
-          {/* 前へ（常に同じ位置） */}
           <button className={styles.arrowBtn} onClick={() => navigate(-1)} aria-label="前の日">&lt;</button>
 
-          {/* 日付表示 + カレンダー */}
           <div className={styles.dateWrap}>
             <button
               className={`${styles.dateDisplay} ${isToday ? styles.dateToday : ""}`}
@@ -203,7 +201,6 @@ export default function DateNavSample() {
               <span className={styles.dateText}>{fmtDateLabel(selectedDate)}</span>
               <span className={styles.calIcon}>📅</span>
             </button>
-
             {showCalendar && (
               <CalendarPopup
                 selectedDate={selectedDate}
@@ -213,16 +210,15 @@ export default function DateNavSample() {
             )}
           </div>
 
-          {/* 次へ（常に同じ位置） */}
           <button className={styles.arrowBtn} onClick={() => navigate(1)} aria-label="次の日">&gt;</button>
-
-          {/* 今日ボタン（今日以外のときだけ表示） */}
-          {!isToday && (
-            <button className={styles.todayBtn} onClick={goToday}>
-              今日
-            </button>
-          )}
         </div>
+
+        {/* 今日ボタン（今日以外のときだけ表示） */}
+        {!isToday && (
+          <div className={styles.todayRow}>
+            <button className={styles.todayBtn} onClick={goToday}>今日に戻る</button>
+          </div>
+        )}
 
         {/* ─ ゲームリスト ─ */}
         <div className={`${styles.gamesArea} ${loading ? styles.loading : ""}`}>
