@@ -71,10 +71,27 @@ export default function HowToPage() {
             <h2 className={styles.sectionTitle}>.ics ファイルをダウンロードする</h2>
           </div>
           <div className={styles.body}>
-            <p>チームページの「全試合 .ics ダウンロード」ボタンから、シーズン全試合をまとめてカレンダーアプリに取り込めます。</p>
+            <p>チームページの「全試合 .ics ダウンロード」ボタンから、シーズン全試合をまとめてカレンダーアプリに取り込めます。<strong>PC のみ対応</strong>しています。</p>
             <ul className={styles.list}>
-              <li>Apple カレンダー、Outlook、Google カレンダーなど主要アプリに対応しています。</li>
               <li>月フィルターで絞り込んだ試合だけをダウンロードすることも可能です。</li>
+            </ul>
+            <p className={styles.guideLabel}>各アプリへの取り込み方：</p>
+            <ul className={styles.list}>
+              <li>
+                <a href="https://support.google.com/calendar/answer/37118?hl=ja&co=GENIE.Platform%3DDesktop" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                  Google カレンダーへの取り込み方
+                </a>
+              </li>
+              <li>
+                <a href="https://support.microsoft.com/ja-jp/office/outlook-%E3%81%AB%E4%BA%88%E5%AE%9A%E8%A1%A8%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B-8e8364e1-400e-4c0f-a573-fe76b5a2d379" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                  Outlook への取り込み方
+                </a>
+              </li>
+              <li>
+                <a href="https://support.apple.com/ja-jp/guide/calendar/icl1023/mac" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                  Apple カレンダーへの取り込み方
+                </a>
+              </li>
             </ul>
           </div>
         </section>

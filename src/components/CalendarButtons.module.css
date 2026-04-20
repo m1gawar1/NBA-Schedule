@@ -63,3 +63,45 @@
   font-size: 0.65rem;
   opacity: 0.75;
 }
+
+.pcOnly {
+  font-size: 0.58rem;
+  font-weight: 700;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.08em;
+  background: var(--border-dim);
+  color: var(--text-muted);
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.icsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.guides {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.guideLink {
+  color: var(--accent-info);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.15s;
+}
+
+.guideLink:hover {
+  opacity: 0.75;
+}
+
+.sep {
+  color: var(--border-dim);
+}
