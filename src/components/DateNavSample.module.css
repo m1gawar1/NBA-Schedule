@@ -5,25 +5,25 @@
   border-left: 4px solid var(--accent-alt);
   font-size: 0.82rem;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
 }
 
 .section {
   padding-bottom: 4rem;
 }
 
-/* ─── Controls ─── */
+/* ─── Controls（固定レイアウト） ─── */
 .controls {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.25rem;
-  flex-wrap: wrap;
 }
 
+/* 矢印ボタン — 常に同じサイズ・位置 */
 .arrowBtn {
   width: 40px;
   height: 40px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,26 +34,23 @@
   font-weight: 700;
   cursor: pointer;
   transition: border-color 0.15s, transform 0.12s, box-shadow 0.12s;
-  flex-shrink: 0;
 }
-
 .arrowBtn:hover {
   border-color: var(--border);
   transform: translate(-2px, -2px);
   box-shadow: 3px 3px 0 var(--shadow);
 }
+.arrowBtn:active { transform: translate(0,0); box-shadow: none; }
 
-.arrowBtn:active {
-  transform: translate(0, 0);
-  box-shadow: none;
-}
-
-/* ─── Date picker ─── */
-.datePicker {
+/* ─── 日付エリア ─── */
+.dateWrap {
   position: relative;
+  flex: 1;
+  min-width: 0;
 }
 
 .dateDisplay {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -65,91 +62,149 @@
   transition: border-color 0.15s;
   white-space: nowrap;
 }
-
-.dateDisplay:hover {
-  border-color: var(--border);
-}
-
-.dateToday {
-  border-color: var(--accent) !important;
-}
+.dateDisplay:hover { border-color: var(--border); }
+.dateToday { border-color: var(--accent) !important; }
 
 .dateText {
   font-family: "Orbitron", sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+  flex: 1;
+  text-align: left;
 }
 
 .todayPill {
   font-family: "Orbitron", sans-serif;
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   background: var(--accent);
   color: #fff;
   padding: 0.1rem 0.45rem;
+  flex-shrink: 0;
 }
 
-.calIcon {
-  font-size: 1rem;
-  opacity: 0.7;
-}
+.calIcon { font-size: 1rem; opacity: 0.6; flex-shrink: 0; }
 
-.calendarPopup {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  z-index: 50;
-  background: var(--bg-card);
-  border: 2px solid var(--border);
-  padding: 0.75rem;
-  box-shadow: 4px 4px 0 var(--shadow);
-}
-
-.dateInput {
-  background: var(--bg-raised);
-  border: 1px solid var(--border-dim);
-  color: var(--text);
-  padding: 0.4rem 0.6rem;
-  font-size: 0.9rem;
-  font-family: inherit;
-  cursor: pointer;
-  outline: none;
-}
-
-.dateInput:focus {
-  border-color: var(--accent);
-}
-
-/* ─── Today button ─── */
+/* 今日ボタン — 常に表示、幅固定 */
 .todayBtn {
-  padding: 0.4rem 0.85rem;
+  flex-shrink: 0;
+  width: 52px;
+  height: 40px;
   background: transparent;
   border: 2px solid var(--accent);
   color: var(--accent);
   font-family: "Orbitron", sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
-
-.todayBtn:hover {
-  background: var(--accent);
-  color: #fff;
+.todayBtn:hover:not(:disabled) { background: var(--accent); color: #fff; }
+.todayBtnDisabled {
+  border-color: var(--border-dim);
+  color: var(--text-muted);
+  cursor: default;
 }
 
-/* ─── Games area ─── */
-.gamesArea {
-  transition: opacity 0.2s;
+/* ─── カレンダーポップアップ ─── */
+.calPopup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 100;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  padding: 1rem;
+  box-shadow: 5px 5px 0 var(--shadow);
+  min-width: 280px;
 }
 
-.loading {
-  opacity: 0.4;
-  pointer-events: none;
+.calHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
 }
+
+.calNavBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid var(--border-dim);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.calNavBtn:hover { border-color: var(--accent); color: var(--accent); }
+
+.calMonthLabel {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+/* 7列グリッド */
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calDayName {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.25rem 0;
+  letter-spacing: 0.05em;
+}
+.calDayName.sun { color: #e05555; }
+.calDayName.sat { color: var(--accent-info); }
+
+.calDay {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.calDay:hover { background: var(--bg-raised); border-color: var(--border-dim); }
+.calDay.sun { color: #e05555; }
+.calDay.sat { color: var(--accent-info); }
+
+.calDayToday {
+  border-color: var(--accent) !important;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.calDaySelected {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
+  font-weight: 700;
+}
+
+/* ─── ゲームエリア ─── */
+.gamesArea { transition: opacity 0.15s; }
+.loading { opacity: 0.35; pointer-events: none; }
 
 .gameList {
   display: grid;
@@ -160,11 +215,11 @@
 .empty {
   color: var(--text-muted);
   font-size: 0.9rem;
-  padding: 2rem 0;
+  padding: 2.5rem 0;
   font-style: italic;
 }
 
-/* ─── Game card ─── */
+/* ─── ゲームカード ─── */
 .gameCard {
   background: var(--bg-card);
   border: 2px solid var(--border-dim);
@@ -174,20 +229,13 @@
   gap: 0.5rem;
   transition: border-color 0.15s, transform 0.12s, box-shadow 0.12s;
 }
-
 .gameCard:hover {
   border-color: var(--border);
-  transform: translate(-2px, -2px);
+  transform: translate(-2px,-2px);
   box-shadow: 3px 3px 0 var(--shadow);
 }
-
-.liveCard {
-  border-color: var(--accent);
-}
-
-.finishedCard {
-  opacity: 0.75;
-}
+.liveCard { border-color: var(--accent); }
+.finishedCard { opacity: 0.7; }
 
 .liveBadge {
   font-family: "Orbitron", sans-serif;
@@ -197,11 +245,7 @@
   color: #d0230f;
   animation: pulse 1.2s infinite;
 }
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
-}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 .gameTime {
   font-family: "Orbitron", sans-serif;
@@ -211,30 +255,12 @@
   letter-spacing: 0.06em;
 }
 
-.matchup {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+.matchup { display: flex; align-items: center; gap: 0.5rem; }
 
-.teamSide {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-width: 0;
-}
+.teamSide { flex:1; display:flex; align-items:center; gap:0.4rem; min-width:0; }
+.teamSideRight { justify-content: flex-end; }
 
-.teamSideRight {
-  justify-content: flex-end;
-}
-
-.colorDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
+.colorDot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
 
 .tricode {
   font-family: "Orbitron", sans-serif;
@@ -244,42 +270,15 @@
   letter-spacing: 0.04em;
   white-space: nowrap;
 }
+.winner { color: var(--accent-ok); }
 
-.winner {
-  color: var(--accent-ok);
-}
+.center { min-width:48px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.vs { font-family:"Orbitron",sans-serif; font-size:0.8rem; font-weight:700; color:var(--text-muted); }
+.score { font-family:"Orbitron",sans-serif; font-size:0.85rem; font-weight:900; color:var(--text); white-space:nowrap; }
 
-.center {
-  min-width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.vs {
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-
-.score {
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: var(--text);
-  white-space: nowrap;
-  letter-spacing: 0.03em;
-}
-
-.arena {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-}
+.arena { font-size:0.68rem; color:var(--text-muted); }
 
 @media (max-width: 500px) {
-  .gameList {
-    grid-template-columns: 1fr 1fr;
-  }
+  .gameList { grid-template-columns: 1fr 1fr; }
+  .calPopup { min-width: 260px; }
 }
