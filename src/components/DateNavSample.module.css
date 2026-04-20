@@ -11,12 +11,13 @@
   padding-bottom: 4rem;
 }
 
-/* ─── Controls（固定レイアウト） ─── */
+/* ─── Controls（中央揃え・固定幅） ─── */
 .controls {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  margin: 0 auto 1.25rem;
+  width: fit-content;
 }
 
 /* 矢印ボタン — 常に同じサイズ・位置 */
@@ -45,6 +46,8 @@
 /* ─── 日付エリア ─── */
 .dateWrap {
   position: relative;
+  width: 210px;
+  flex-shrink: 0;
 }
 
 .dateDisplay {
