@@ -109,6 +109,7 @@
   transition: color 0.2s;
   line-height: 1.2;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .teamName:hover {
