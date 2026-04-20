@@ -57,18 +57,13 @@ function TeamSide({ team, teamInfo, isFinished, isHome }) {
       <div className={styles.teamInfo}>
         {slug ? (
           <Link href={`/team/${slug}`} className={styles.teamName}>
-            {team.teamCity} {team.teamName}
+            {teamInfo?.tricode || team.teamTricode}
           </Link>
         ) : (
-          <span className={styles.teamName}>{team.teamCity} {team.teamName}</span>
+          <span className={styles.teamName}>{teamInfo?.tricode || team.teamTricode}</span>
         )}
         <span className={styles.homeAwayLabel}>{isHome ? "HOME" : "AWAY"}</span>
       </div>
-      {isFinished && (
-        <span className={`${styles.gameScore} ${team.score > (isHome ? team.score : team.score) ? styles.winner : ""}`}>
-          {team.score}
-        </span>
-      )}
     </div>
   );
 }
