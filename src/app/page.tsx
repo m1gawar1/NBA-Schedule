@@ -1,4 +1,5 @@
 import { fetchNBASchedule } from "@/lib/nba-data";
+import { getEffectiveDateKey } from "@/lib/utils";
 import HomeClient from "@/components/HomeClient";
 import type { Metadata } from "next";
 
@@ -13,10 +14,7 @@ export default async function Home() {
 
   const allGames = await fetchNBASchedule();
   const todayGames = allGames
-    .filter((g) => {
-      const jst = new Date(new Date(g.gameDateTimeUTC).getTime() + 9 * 60 * 60 * 1000);
-      return jst.toISOString().slice(0, 10) === todayJST;
-    })
+    .filter((g) => getEffectiveDateKey(g) === todayJST)
     .sort((a, b) => new Date(a.gameDateTimeUTC).getTime() - new Date(b.gameDateTimeUTC).getTime());
 
   return <HomeClient initialGames={todayGames} initialDate={todayJST} />;

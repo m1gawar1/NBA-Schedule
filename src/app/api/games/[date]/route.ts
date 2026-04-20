@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { fetchNBASchedule } from "@/lib/nba-data";
+import { getEffectiveDateKey } from "@/lib/utils";
 
 export async function GET(
   _request: Request,
@@ -12,10 +13,7 @@ export async function GET(
 
   const allGames = await fetchNBASchedule();
   const games = allGames
-    .filter((g) => {
-      const jst = new Date(new Date(g.gameDateTimeUTC).getTime() + 9 * 60 * 60 * 1000);
-      return jst.toISOString().slice(0, 10) === date;
-    })
+    .filter((g) => getEffectiveDateKey(g) === date)
     .sort(
       (a, b) =>
         new Date(a.gameDateTimeUTC).getTime() -

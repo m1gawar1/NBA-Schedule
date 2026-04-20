@@ -104,7 +104,6 @@ export function isTBD(game) {
  * 例: "2026年4月28日（火）"
  */
 export function formatJSTDateTBD(utcDateString) {
-  // UTC日付 + 1日 = 日本で観戦する日
   const date = new Date(utcDateString);
   const nextDay = new Date(date.getTime() + 24 * 60 * 60 * 1000);
   return nextDay.toLocaleDateString("ja-JP", {
@@ -114,4 +113,17 @@ export function formatJSTDateTBD(utcDateString) {
     day: "numeric",
     weekday: "short",
   });
+}
+
+/**
+ * 試合のJST日付キー（"YYYY-MM-DD"）を返す
+ * TBDの場合は翌日扱い
+ */
+export function getEffectiveDateKey(game) {
+  const base = new Date(game.gameDateTimeUTC);
+  const shifted = isTBD(game)
+    ? new Date(base.getTime() + 24 * 60 * 60 * 1000) // TBD: +1日
+    : base;
+  const jst = new Date(shifted.getTime() + 9 * 60 * 60 * 1000);
+  return jst.toISOString().slice(0, 10);
 }
