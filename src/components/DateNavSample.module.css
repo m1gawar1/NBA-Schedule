@@ -54,9 +54,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0 1rem;
+  justify-content: space-between;
+  padding: 0 1.1rem;
   height: 56px;
   background: var(--bg-card);
   border: 2px solid var(--border-dim);
@@ -70,12 +69,18 @@
 
 .dateText {
   font-family: "Orbitron", sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
-.calIcon { font-size: 1rem; opacity: 0.5; flex-shrink: 0; }
+.calIcon {
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+}
+
+.dateDisplay:hover .calIcon { opacity: 0.9; }
 
 /* ─── 今日ボタン（controls の外・中央） ─── */
 .todayRow {

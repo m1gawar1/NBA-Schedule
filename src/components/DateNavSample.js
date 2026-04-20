@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "./DateNavSample.module.css";
 
 // ── モックデータ ───────────────────────────────────────────
@@ -199,7 +200,7 @@ export default function DateNavSample() {
               onClick={() => setShowCalendar(v => !v)}
             >
               <span className={styles.dateText}>{fmtDateLabel(selectedDate)}</span>
-              <span className={styles.calIcon}>📅</span>
+              <Image src="/calendar-icon.png" alt="カレンダー" width={22} height={22} className={styles.calIcon} />
             </button>
             {showCalendar && (
               <CalendarPopup
