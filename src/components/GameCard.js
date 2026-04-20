@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLogoUrl, getTeamById } from "@/lib/teams";
-import { formatJSTFull, formatJSTDateOnly, isPlayoff, isTBD } from "@/lib/utils";
+import { formatJSTFull, formatJSTDateTBD, isPlayoff, isTBD } from "@/lib/utils";
 import CalendarButtons from "./CalendarButtons";
 import styles from "./GameCard.module.css";
 
@@ -22,7 +22,7 @@ export default function GameCard({ game, compact = false }) {
 
       {tbd ? (
         <p className={styles.datetime}>
-          {formatJSTDateOnly(game.gameDateTimeUTC)}
+          {formatJSTDateTBD(game.gameDateTimeUTC)}
           <span className={styles.tbdBadge}>時間未定</span>
         </p>
       ) : (

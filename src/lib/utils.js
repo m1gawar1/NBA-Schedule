@@ -99,12 +99,15 @@ export function isTBD(game) {
 }
 
 /**
- * TBD用の日付表示（時刻なし）
- * 例: "2026年4月27日（月）"
+ * TBD用の日付表示（時刻なし・翌日JST）
+ * NBA試合は夜（ET 7〜10時台）のため、TBDの仮置き日付は翌日JST扱いにする
+ * 例: "2026年4月28日（火）"
  */
-export function formatJSTDateOnly(utcDateString) {
+export function formatJSTDateTBD(utcDateString) {
+  // UTC日付 + 1日 = 日本で観戦する日
   const date = new Date(utcDateString);
-  return date.toLocaleDateString("ja-JP", {
+  const nextDay = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+  return nextDay.toLocaleDateString("ja-JP", {
     timeZone: "Asia/Tokyo",
     year: "numeric",
     month: "long",

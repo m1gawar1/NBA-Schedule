@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLogoUrl, getTeamById } from "@/lib/teams";
-import { formatJSTTime, isPlayoff, isTBD } from "@/lib/utils";
+import { formatJSTTime, isPlayoff, isTBD, formatJSTDateTBD } from "@/lib/utils";
 import CalendarButtons from "./CalendarButtons";
 import styles from "./WeekSchedule.module.css";
 
@@ -70,7 +70,10 @@ function WeekGameCard({ game }) {
       {isLive && <span className={styles.liveDot} />}
 
       <p className={`${styles.gameTime} ${tbd ? styles.tbdTime : ""}`}>
-        {tbd ? "時間未定" : formatJSTTime(game.gameDateTimeUTC)}
+        {tbd
+          ? <>{formatJSTDateTBD(game.gameDateTimeUTC)}<br />時間未定</>
+          : formatJSTTime(game.gameDateTimeUTC)
+        }
       </p>
 
       <div className={styles.teams}>
