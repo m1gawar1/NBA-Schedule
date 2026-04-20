@@ -1,0 +1,96 @@
+/* ─── カレンダーポップアップ ─── */
+.calPopup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 100;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  padding: 1rem;
+  box-shadow: 5px 5px 0 var(--shadow);
+  min-width: 280px;
+}
+
+.calHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.calNavBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid var(--border-dim);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.calNavBtn:hover { border-color: var(--accent); color: var(--accent); }
+
+.calMonthLabel {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+/* 7列グリッド */
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calDayName {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.25rem 0;
+  letter-spacing: 0.05em;
+}
+.calDayName.sun { color: #e05555; }
+.calDayName.sat { color: var(--accent-info); }
+
+.calDay {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.calDay:hover { background: var(--bg-raised); border-color: var(--border-dim); }
+.calDay.sun { color: #e05555; }
+.calDay.sat { color: var(--accent-info); }
+
+.calDayToday {
+  border-color: var(--accent) !important;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.calDaySelected {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
+  font-weight: 700;
+}
+
+@media (max-width: 500px) {
+  .calPopup { min-width: 260px; }
+}

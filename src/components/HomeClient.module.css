@@ -1,0 +1,146 @@
+/* ─── Header ─── */
+.header {
+  padding: 2.5rem 0 2rem;
+}
+
+.title {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ─── Controls：< 日付 > を等間隔・中央揃え ─── */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 480px;
+  max-width: 100%;
+  margin: 0 auto 0.75rem;
+}
+
+.arrowBtn {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 2px solid var(--border-dim);
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.12s, box-shadow 0.12s;
+}
+.arrowBtn:hover {
+  border-color: var(--border);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+.arrowBtn:active { transform: translate(0, 0); box-shadow: none; }
+
+/* ─── 日付エリア ─── */
+.dateWrap {
+  position: relative;
+  flex: 1;
+  margin: 0 0.75rem;
+}
+
+.dateDisplay {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 1.1rem;
+  height: 56px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-dim);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  white-space: nowrap;
+}
+.dateDisplay:hover { border-color: var(--border); }
+.dateToday { border-color: var(--accent) !important; }
+
+.dateText {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.calIcon {
+  position: absolute;
+  right: 1.1rem;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+}
+
+.dateDisplay:hover .calIcon { opacity: 0.9; }
+
+/* ─── 今日ボタン（controls の外・中央） ─── */
+.todayRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.todayBtn {
+  padding: 0.35rem 1.25rem;
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.todayBtn:hover { background: var(--accent); color: #fff; }
+
+/* ─── ゲームエリア ─── */
+.gamesArea { transition: opacity 0.15s; }
+.loading { opacity: 0.35; pointer-events: none; }
+
+.empty {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 2.5rem 0;
+  font-style: italic;
+}
+
+/* ─── ゲームグリッド ─── */
+.gameGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* ─── Divider ─── */
+.divider {
+  border: none;
+  border-top: 2px solid var(--border-dim);
+  margin: 3rem 0 2.5rem;
+}
+
+/* ─── Conference sections ─── */
+.conferenceSection {
+  margin-bottom: 2.5rem;
+}
