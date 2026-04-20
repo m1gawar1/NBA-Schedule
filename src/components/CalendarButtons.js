@@ -1,10 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { buildGoogleCalendarUrl, buildICSDataUrl } from "@/lib/calendar";
 import styles from "./CalendarButtons.module.css";
 
 export default function CalendarButtons({ game, games, label }) {
-  // 単試合 or 複数試合モード
   const isMulti = Array.isArray(games) && games.length > 0;
 
   const handleGoogleSingle = () => {
@@ -19,13 +19,6 @@ export default function CalendarButtons({ game, games, label }) {
     a.click();
   };
 
-  const handleGoogleMulti = () => {
-    // 複数ゲームは先頭1件のみGoogle Calendar（一括は.ics推奨）
-    if (games && games.length > 0) {
-      window.open(buildGoogleCalendarUrl(games[0]), "_blank");
-    }
-  };
-
   if (isMulti) {
     return (
       <div className={styles.wrap}>
@@ -34,7 +27,8 @@ export default function CalendarButtons({ game, games, label }) {
           onClick={handleICSMulti}
           title="全試合をiCal形式でダウンロード（Google・Apple・Outlook対応）"
         >
-          📅 全試合 .ics ダウンロード
+          <Image src="/calendar-icon.png" alt="" width={14} height={14} className={styles.icon} />
+          全試合 .ics ダウンロード
           {label && <span className={styles.count}>（{games.length}試合）</span>}
         </button>
       </div>
@@ -47,7 +41,8 @@ export default function CalendarButtons({ game, games, label }) {
         className={`${styles.btn} ${styles.google}`}
         onClick={handleGoogleSingle}
       >
-        📅 Googleカレンダーに追加
+        <Image src="/calendar-icon.png" alt="" width={14} height={14} className={styles.icon} />
+        Googleカレンダーに追加
       </button>
     </div>
   );

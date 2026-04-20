@@ -12,10 +12,9 @@
   font-size: 0.72rem;
   font-weight: 700;
   font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   cursor: pointer;
   border: 2px solid transparent;
-  text-transform: uppercase;
   white-space: nowrap;
   transition: transform 0.12s, box-shadow 0.12s, opacity 0.15s;
 }
@@ -47,6 +46,17 @@
 
 .ics:hover {
   box-shadow: 3px 3px 0 var(--accent-ok);
+}
+
+.icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+  filter: brightness(0) invert(1);
+}
+
+.ics .icon {
+  filter: none;
+  opacity: 0.8;
 }
 
 .count {
