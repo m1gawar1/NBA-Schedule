@@ -2,34 +2,28 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.3rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   background: transparent;
-  border: 2px solid var(--border);
-  color: var(--text);
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-muted);
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, transform 0.12s, box-shadow 0.12s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .btn:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
-  transform: translate(-2px, -2px);
-  box-shadow: 3px 3px 0 var(--shadow);
-}
-
-.btn:active {
-  transform: translate(0, 0);
-  box-shadow: none;
 }
 
 .icon {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-style: normal;
+  line-height: 1;
 }
 
 .label {

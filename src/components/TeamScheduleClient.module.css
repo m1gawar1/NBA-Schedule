@@ -1,34 +1,35 @@
 .header {
   padding: 2.5rem 0 2rem;
   margin-bottom: 2rem;
-  border-bottom: 2px solid var(--border-dim);
+  border-bottom: 1px solid var(--border-dim);
 }
 
 .headerInner {
   display: flex;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1.75rem;
 }
 
 .logoWrap {
   flex-shrink: 0;
   padding: 0.75rem;
   background: var(--bg-card);
-  border: 2px solid var(--border-dim);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
 }
 
 .teamMeta {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
   padding-top: 0.25rem;
 }
 
 .teamCity {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   font-weight: 600;
 }
 
@@ -44,14 +45,14 @@
 
 .tricode {
   font-family: "Orbitron", sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--team-color, var(--accent));
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
 }
 
 .actions {
-  margin-top: 1rem;
+  margin-top: 0.9rem;
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
@@ -59,9 +60,10 @@
 
 .bulkButtons {
   background: var(--bg-raised);
-  border: 2px solid var(--border-dim);
-  border-left: 4px solid var(--accent-ok);
-  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border-dim);
+  border-left: 3px solid var(--accent-ok);
+  border-radius: 8px;
+  padding: 0.85rem 1.1rem;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -91,7 +93,6 @@
   padding: 2.5rem 0;
   text-align: center;
   font-size: 0.88rem;
-  font-style: italic;
 }
 
 @media (max-width: 500px) {
