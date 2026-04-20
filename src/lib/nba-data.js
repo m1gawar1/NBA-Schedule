@@ -41,14 +41,52 @@ export async function fetchTeamGames(teamId) {
 }
 
 /**
- * 今日（JST）の試合を取得
+ * 今日（JST）の試合を時間順で取得
  */
 export async function fetchTodayGames() {
   const allGames = await fetchNBASchedule();
   const nowJST = new Date(Date.now() + 9 * 60 * 60 * 1000);
-  return allGames.filter((g) => {
-    const gameDate = new Date(g.gameDateTimeUTC);
-    const gameDateJST = new Date(gameDate.getTime() + 9 * 60 * 60 * 1000);
-    return gameDateJST.toDateString() === nowJST.toDateString();
-  });
+  return allGames
+    .filter((g) => {
+      const gameDateJST = new Date(new Date(g.gameDateTimeUTC).getTime() + 9 * 60 * 60 * 1000);
+      return gameDateJST.toDateString() === nowJST.toDateString();
+    })
+    .sort((a, b) => new Date(a.gameDateTimeUTC) - new Date(b.gameDateTimeUTC));
+}
+
+/**
+ * 前後1週間（JST）の全試合を日付ごとにグループ化して返す
+ */
+export async function fetchWeekGames() {
+  const allGames = await fetchNBASchedule();
+  const nowJST = new Date(Date.now() + 9 * 60 * 60 * 1000);
+
+  // 今日のJST日付（時刻を0にリセット）
+  const todayJST = new Date(nowJST);
+  todayJST.setHours(0, 0, 0, 0);
+
+  const weekAgo   = new Date(todayJST.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const weekAhead = new Date(todayJST.getTime() + 8 * 24 * 60 * 60 * 1000); // +7日の終わり
+
+  // 対象期間でフィルタ → 時間順ソート
+  const filtered = allGames
+    .filter((g) => {
+      const gameDateJST = new Date(new Date(g.gameDateTimeUTC).getTime() + 9 * 60 * 60 * 1000);
+      return gameDateJST >= weekAgo && gameDateJST < weekAhead;
+    })
+    .sort((a, b) => new Date(a.gameDateTimeUTC) - new Date(b.gameDateTimeUTC));
+
+  // JST日付文字列（"2026-04-20"）でグループ化
+  const grouped = {};
+  for (const game of filtered) {
+    const jst = new Date(new Date(game.gameDateTimeUTC).getTime() + 9 * 60 * 60 * 1000);
+    const key = jst.toISOString().slice(0, 10); // "YYYY-MM-DD"
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(game);
+  }
+
+  // 今日のキーも返す（ハイライト用）
+  const todayKey = todayJST.toISOString().slice(0, 10);
+
+  return { grouped, todayKey };
 }

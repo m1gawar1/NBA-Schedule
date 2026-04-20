@@ -11,6 +11,9 @@ export default function Header() {
           <span className={styles.logoText}>NBA Tip-Off Time</span>
         </Link>
         <div className={styles.right}>
+          <nav className={styles.nav}>
+            <Link href="/schedule" className={styles.navLink}>週間日程</Link>
+          </nav>
           <ThemeToggle />
         </div>
       </div>

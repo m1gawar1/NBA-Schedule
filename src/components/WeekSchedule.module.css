@@ -1,0 +1,243 @@
+.header {
+  padding: 2.5rem 0 2rem;
+  border-bottom: 2px solid var(--border-dim);
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ─── Timeline ─── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 4rem;
+}
+
+/* ─── Day block ─── */
+.dayBlock {
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.dateHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 54px; /* header height */
+  background: var(--bg);
+  z-index: 10;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.today .dateHeader,
+.dateHeader.today {
+  border-bottom-color: var(--accent);
+}
+
+.dateLabel {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+
+.today .dateLabel {
+  color: var(--accent);
+}
+
+.weekend .dateLabel {
+  color: var(--accent-alt, var(--text));
+  opacity: 0.85;
+}
+
+.todayBadge {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.55rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+}
+
+.gameCount {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+/* ─── Game grid ─── */
+.gameGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.6rem;
+  padding: 0.75rem 0;
+}
+
+/* ─── Game card ─── */
+.gameCard {
+  background: var(--bg-card);
+  border: 2px solid var(--border-dim);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  transition: border-color 0.15s, transform 0.12s, box-shadow 0.12s;
+}
+
+.gameCard:hover {
+  border-color: var(--border);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.liveCard {
+  border-color: var(--accent);
+}
+
+.playoffBadge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.52rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  padding: 0.12rem 0.4rem;
+}
+
+.liveDot {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  width: 8px;
+  height: 8px;
+  background: #d0230f;
+  border-radius: 50%;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+
+.gameTime {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+
+/* ─── Teams ─── */
+.teams {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 44px;
+}
+
+.vsText {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.scoreInline {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--text);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Team chip ─── */
+.teamLink {
+  flex: 1;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.teamChip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.teamChipRight {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.tricode {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.teamLink:hover .tricode {
+  color: var(--accent);
+}
+
+.winner .tricode {
+  color: var(--accent-ok);
+}
+
+.arena {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.calBtn {
+  margin-top: 0.1rem;
+}
+
+.empty {
+  color: var(--text-muted);
+  padding: 3rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .gameGrid {
+    grid-template-columns: 1fr;
+  }
+}

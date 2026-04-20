@@ -40,3 +40,26 @@
   align-items: center;
   gap: 1rem;
 }
+
+.nav {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.navLink {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.3rem 0.7rem;
+  border: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--text);
+  border-color: var(--border-dim);
+}
