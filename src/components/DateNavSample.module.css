@@ -86,7 +86,7 @@
 
 .calIcon { font-size: 1rem; opacity: 0.6; flex-shrink: 0; }
 
-/* 今日ボタン — 常に表示、幅固定 */
+/* 今日ボタン — 今日以外のときだけ表示、幅固定でレイアウト安定 */
 .todayBtn {
   flex-shrink: 0;
   width: 52px;
@@ -101,11 +101,20 @@
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
-.todayBtn:hover:not(:disabled) { background: var(--accent); color: #fff; }
-.todayBtnDisabled {
-  border-color: var(--border-dim);
-  color: var(--text-muted);
-  cursor: default;
+.todayBtn:hover { background: var(--accent); color: #fff; }
+
+/* 今日ボタンが消えてもレイアウトを維持するためのスペーサー */
+.controls::after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+/* 今日ボタンが表示されているときはスペーサー不要 */
+.controls:has(.todayBtn)::after {
+  display: none;
 }
 
 /* ─── カレンダーポップアップ ─── */

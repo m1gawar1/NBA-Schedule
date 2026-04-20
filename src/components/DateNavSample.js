@@ -201,7 +201,6 @@ export default function DateNavSample() {
               onClick={() => setShowCalendar(v => !v)}
             >
               <span className={styles.dateText}>{fmtDateLabel(selectedDate)}</span>
-              {isToday && <span className={styles.todayPill}>TODAY</span>}
               <span className={styles.calIcon}>📅</span>
             </button>
 
@@ -217,14 +216,12 @@ export default function DateNavSample() {
           {/* 次へ（常に同じ位置） */}
           <button className={styles.arrowBtn} onClick={() => navigate(1)} aria-label="次の日">&gt;</button>
 
-          {/* 今日ボタン（常に表示、今日のときはdisabled） */}
-          <button
-            className={`${styles.todayBtn} ${isToday ? styles.todayBtnDisabled : ""}`}
-            onClick={goToday}
-            disabled={isToday}
-          >
-            今日
-          </button>
+          {/* 今日ボタン（今日以外のときだけ表示） */}
+          {!isToday && (
+            <button className={styles.todayBtn} onClick={goToday}>
+              今日
+            </button>
+          )}
         </div>
 
         {/* ─ ゲームリスト ─ */}
