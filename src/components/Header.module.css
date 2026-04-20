@@ -3,15 +3,15 @@
   top: 0;
   z-index: 100;
   background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
+  border-bottom: 2px solid var(--border);
+  transition: background 0.25s;
 }
 
 .inner {
   max-width: 1360px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 56px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,14 +24,14 @@
   text-decoration: none;
 }
 
-.logoIcon { font-size: 1.3rem; line-height: 1; }
+.logoIcon { font-size: 1.25rem; }
 
 .logoText {
   font-family: "Orbitron", sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 900;
   color: var(--text);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 

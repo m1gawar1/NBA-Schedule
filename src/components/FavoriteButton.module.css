@@ -3,29 +3,38 @@
   align-items: center;
   gap: 0.35rem;
   padding: 0.35rem 0.85rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border-dim);
   background: transparent;
   color: var(--text-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-  letter-spacing: 0.02em;
+  transition: border-color 0.15s, color 0.15s, transform 0.12s, box-shadow 0.12s, background 0.15s;
 }
 
 .btn:hover {
-  border-color: var(--accent-warn);
-  color: var(--accent-warn);
+  border-color: var(--accent-alt);
+  color: var(--accent-alt);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--accent-alt);
+}
+
+.btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
 }
 
 .active {
-  background: var(--accent-warn);
-  border-color: var(--accent-warn);
-  color: #fff;
-  font-weight: 700;
+  background: var(--accent-alt);
+  border-color: var(--accent-alt);
+  color: #111;
 }
 
 .active:hover {
-  opacity: 0.9;
+  background: var(--accent-alt);
+  border-color: var(--accent-alt);
+  color: #111;
 }
