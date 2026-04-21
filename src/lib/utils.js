@@ -87,15 +87,12 @@ export function isPlayoff(gameId) {
 
 /**
  * 時間未定（TBD）かどうか判定
- * - gameStatusText が "TBD" / "time-tbd" を含む場合
- * - gameDateTimeUTC が UTC 0:00:00（時刻プレースホルダー）の場合
+ * gameStatusText が "TBD" / "time-tbd" を含む場合のみ TBD とする。
+ * ※ UTC 00:00:00 は ET 午後8時のゲームでも同じ値になるため TBD 判定に使わない。
  */
 export function isTBD(game) {
   const statusText = (game.gameStatusText || "").toLowerCase();
-  if (statusText.includes("tbd")) return true;
-  // 深夜0時UTCは「時間未定」の慣例的な仮置き値
-  if (game.gameDateTimeUTC?.endsWith("T00:00:00Z")) return true;
-  return false;
+  return statusText.includes("tbd");
 }
 
 /**
