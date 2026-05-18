@@ -10,8 +10,15 @@ function isRegularOrPlayoff(game) {
 }
 
 export async function fetchNBASchedule() {
-  const res = await fetch(SCHEDULE_URL, { next: { revalidate: 3600 } });
-  if (!res.ok) throw new Error("NBA schedule fetch failed");
+  const res = await fetch(SCHEDULE_URL, {
+    next: { revalidate: 3600 },
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "Referer": "https://www.nba.com/",
+      "Origin": "https://www.nba.com",
+    },
+  });
+  if (!res.ok) throw new Error(`NBA schedule fetch failed: ${res.status}`);
   const data = await res.json();
 
   const games = [];

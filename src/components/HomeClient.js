@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import GameCard from "./GameCard";
 import TeamCard from "./TeamCard";
@@ -43,6 +43,13 @@ export default function HomeClient({ initialGames, initialDate }) {
       setLoading(false);
     }
   };
+
+  // キャッシュが古い場合（日付をまたいだ場合）は今日のデータを自動取得
+  useEffect(() => {
+    if (initialDate !== todayStr) {
+      loadGames(todayStr);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const navigate = (days) => {
     const d = new Date(selectedDate + "T12:00:00+09:00");
