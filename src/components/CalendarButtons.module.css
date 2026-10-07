@@ -17,6 +17,7 @@
   border: 2px solid transparent;
   white-space: nowrap;
   transition: transform 0.12s, box-shadow 0.12s, opacity 0.15s;
+  text-decoration: none;
 }
 
 .btn:hover {

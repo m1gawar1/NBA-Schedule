@@ -13,10 +13,6 @@ const ICS_GUIDES = [
 export default function CalendarButtons({ game, games, label, fileName = "nba-schedule.ics" }) {
   const isMulti = Array.isArray(games) && games.length > 0;
 
-  const handleGoogleSingle = () => {
-    window.open(buildGoogleCalendarUrl(game), "_blank");
-  };
-
   const handleICSMulti = () => {
     const dataUrl = buildICSDataUrl(games);
     const a = document.createElement("a");
@@ -57,13 +53,16 @@ export default function CalendarButtons({ game, games, label, fileName = "nba-sc
 
   return (
     <div className={styles.wrap}>
-      <button
+      {/* window.open はポップアップ扱いでブロックされたり、読み込み前に押すと反応しないため通常リンクにする */}
+      <a
+        href={buildGoogleCalendarUrl(game)}
+        target="_blank"
+        rel="noopener noreferrer"
         className={`${styles.btn} ${styles.google}`}
-        onClick={handleGoogleSingle}
       >
         <Image src="/calendar-icon.png" alt="" width={14} height={14} className={styles.icon} />
         Googleカレンダーに追加
-      </button>
+      </a>
     </div>
   );
 }
