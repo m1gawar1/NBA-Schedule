@@ -10,7 +10,7 @@ const ICS_GUIDES = [
   { label: "Apple カレンダー",  url: "https://support.apple.com/ja-jp/guide/calendar/icl1023/mac" },
 ];
 
-export default function CalendarButtons({ game, games, label }) {
+export default function CalendarButtons({ game, games, label, fileName = "nba-schedule.ics" }) {
   const isMulti = Array.isArray(games) && games.length > 0;
 
   const handleGoogleSingle = () => {
@@ -21,7 +21,7 @@ export default function CalendarButtons({ game, games, label }) {
     const dataUrl = buildICSDataUrl(games);
     const a = document.createElement("a");
     a.href = dataUrl;
-    a.download = "nba-schedule.ics";
+    a.download = fileName;
     a.click();
   };
 

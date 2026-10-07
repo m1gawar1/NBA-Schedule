@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import { getLogoUrl } from "@/lib/teams";
-import { getJSTYearMonth, isPlayoff, isPreseason } from "@/lib/utils";
+import { getJSTYearMonth, getSeasonLabel, isPlayoff, isPreseason } from "@/lib/utils";
 import GameCard from "./GameCard";
 import MonthFilter from "./MonthFilter";
 import CalendarButtons from "./CalendarButtons";
@@ -53,6 +53,14 @@ export default function TeamScheduleClient({ team, games, fetchError = false }) 
     [filteredGames]
   );
 
+  // .ics のファイル名（例: OKC-Thunder-2026-27.ics / 月選択時は OKC-Thunder-2026-27-11月.ics）
+  const icsFileName = useMemo(() => {
+    const season = upcomingGames.length > 0 ? `-${getSeasonLabel(upcomingGames[0].gameDateTimeUTC)}` : "";
+    const suffix =
+      selectedMonth === "all" ? "" : selectedMonth === "playoff" ? "-プレーオフ" : `-${Number(selectedMonth.slice(5, 7))}月`;
+    return `${team.tricode}-${team.name.replace(/\s+/g, "-")}${season}${suffix}.ics`;
+  }, [team, upcomingGames, selectedMonth]);
+
   const logoUrl = getLogoUrl(team.teamId);
 
   return (
@@ -86,7 +94,7 @@ export default function TeamScheduleClient({ team, games, fetchError = false }) 
           <p className={styles.bulkLabel}>
             未消化試合 <strong>{upcomingGames.length}件</strong> を一括追加:
           </p>
-          <CalendarButtons games={upcomingGames} label={true} />
+          <CalendarButtons games={upcomingGames} label={true} fileName={icsFileName} />
         </div>
       )}
 
