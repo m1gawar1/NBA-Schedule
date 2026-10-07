@@ -3,9 +3,10 @@
 import { useState } from "react";
 import styles from "./MonthFilter.module.css";
 
-// "2026-10" → "10月"（プレーオフは別ラベル）
+// "2026-10" → "10月"（プレーオフ・プレシーズンは別ラベル）
 function monthLabel(key) {
   if (key === "playoff") return "プレーオフ";
+  if (key === "preseason") return "プレシーズン";
   return `${Number(key.slice(5, 7))}月`;
 }
 

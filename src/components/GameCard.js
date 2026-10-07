@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLogoUrl, getTeamById } from "@/lib/teams";
-import { formatJSTFull, formatJSTDateTBD, isPlayoff, isTBD } from "@/lib/utils";
+import { formatJSTFull, formatJSTDateTBD, isPlayoff, isPreseason, isTBD } from "@/lib/utils";
 import CalendarButtons from "./CalendarButtons";
 import styles from "./GameCard.module.css";
 
@@ -9,6 +9,7 @@ export default function GameCard({ game, compact = false }) {
   const homeTeamInfo = getTeamById(game.homeTeam.teamId);
   const awayTeamInfo = getTeamById(game.awayTeam.teamId);
   const playoff = isPlayoff(game.gameId);
+  const preseason = isPreseason(game.gameId);
 
   const isFinished = game.gameStatus === 3;
   const isLive = game.gameStatus === 2;
@@ -18,6 +19,7 @@ export default function GameCard({ game, compact = false }) {
     <div className={`${styles.card} ${compact ? styles.compact : ""} ${tbd ? styles.tbdCard : ""}`}>
       {playoff && !tbd && <span className={styles.playoffBadge}>PLAYOFFS</span>}
       {playoff &&  tbd && <span className={styles.playoffBadge}>PLAYOFFS</span>}
+      {preseason && <span className={`${styles.playoffBadge} ${styles.preseasonBadge}`}>PRESEASON</span>}
       {isLive && <span className={styles.liveBadge}>LIVE</span>}
 
       {tbd ? (

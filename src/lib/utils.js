@@ -86,6 +86,13 @@ export function isPlayoff(gameId) {
 }
 
 /**
+ * プレシーズンかどうか判定（gameIdが"001"で始まる）
+ */
+export function isPreseason(gameId) {
+  return gameId.startsWith("001");
+}
+
+/**
  * 時間未定（TBD）かどうか判定
  * gameStatusText が "TBD" / "time-tbd" を含む場合のみ TBD とする。
  * ※ UTC 00:00:00 は ET 午後8時のゲームでも同じ値になるため TBD 判定に使わない。

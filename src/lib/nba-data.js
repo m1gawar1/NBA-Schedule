@@ -4,8 +4,8 @@ import { getTeamById, getTeamByEspnAbbr, getEspnAbbr } from "@/lib/teams";
 // NBA公式CDNが403を返すようになったため ESPN の公開APIから取得する
 const ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba";
 
-// ESPN の seasonType → 旧NBA gameId の接頭辞（2=レギュラー, 3=プレーオフ）
-const GAME_ID_PREFIX = { 2: "002", 3: "004" };
+// ESPN の seasonType → 旧NBA gameId の接頭辞（1=プレシーズン, 2=レギュラー, 3=プレーオフ）
+const GAME_ID_PREFIX = { 1: "001", 2: "002", 3: "004" };
 
 const STATUS_BY_STATE = { pre: 1, in: 2, post: 3 };
 
@@ -88,7 +88,7 @@ function byTime(a, b) {
 }
 
 /**
- * チームのシーズン全試合（レギュラー + プレーオフ）
+ * チームのシーズン全試合（プレシーズン + レギュラー + プレーオフ）
  */
 export async function fetchTeamGames(teamId) {
   const team = getTeamById(teamId);
@@ -96,13 +96,15 @@ export async function fetchTeamGames(teamId) {
   const abbr = getEspnAbbr(team).toLowerCase();
   const season = getCurrentSeasonYear();
 
-  const [regular, playoff] = await Promise.all([
+  const [preseason, regular, playoff] = await Promise.all([
+    // プレシーズンは補助的な情報なので失敗しても空扱い
+    fetchJSON(`${ESPN_BASE}/teams/${abbr}/schedule?season=${season}&seasontype=1`).catch(() => ({ events: [] })),
     fetchJSON(`${ESPN_BASE}/teams/${abbr}/schedule?season=${season}&seasontype=2`),
     // プレーオフは開始前だと存在しないことがあるため失敗しても空扱い
     fetchJSON(`${ESPN_BASE}/teams/${abbr}/schedule?season=${season}&seasontype=3`).catch(() => ({ events: [] })),
   ]);
 
-  return [...(regular.events || []), ...(playoff.events || [])]
+  return [...(preseason.events || []), ...(regular.events || []), ...(playoff.events || [])]
     .map(normalizeEvent)
     .filter(Boolean)
     .sort(byTime);

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLogoUrl, getTeamById } from "@/lib/teams";
-import { formatJSTTime, isPlayoff, isTBD, formatJSTDateTBD } from "@/lib/utils";
+import { formatJSTTime, isPlayoff, isPreseason, isTBD, formatJSTDateTBD } from "@/lib/utils";
 import CalendarButtons from "./CalendarButtons";
 import styles from "./WeekSchedule.module.css";
 
@@ -67,6 +67,7 @@ function WeekGameCard({ game }) {
   return (
     <div className={`${styles.gameCard} ${isLive ? styles.liveCard : ""}`}>
       {playoff && <span className={styles.playoffBadge}>PO</span>}
+      {isPreseason(game.gameId) && <span className={`${styles.playoffBadge} ${styles.preseasonBadge}`}>PRE</span>}
       {isLive && <span className={styles.liveDot} />}
 
       <p className={`${styles.gameTime} ${tbd ? styles.tbdTime : ""}`}>

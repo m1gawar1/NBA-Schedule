@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import { getLogoUrl } from "@/lib/teams";
-import { getJSTYearMonth, isPlayoff } from "@/lib/utils";
+import { getJSTYearMonth, isPlayoff, isPreseason } from "@/lib/utils";
 import GameCard from "./GameCard";
 import MonthFilter from "./MonthFilter";
 import CalendarButtons from "./CalendarButtons";
@@ -19,11 +19,15 @@ export default function TeamScheduleClient({ team, games, fetchError = false }) 
     for (const game of games) {
       if (isPlayoff(game.gameId)) {
         months.add("playoff");
+      } else if (isPreseason(game.gameId)) {
+        months.add("preseason");
       } else {
         months.add(getJSTYearMonth(game.gameDateTimeUTC));
       }
     }
-    return Array.from(months).sort();
+    // プレシーズンは先頭、プレーオフは末尾
+    const order = (m) => (m === "preseason" ? "0" : m === "playoff" ? "9" : m);
+    return Array.from(months).sort((a, b) => order(a).localeCompare(order(b)));
   }, [games]);
 
   // フィルタリング済みゲーム
@@ -32,14 +36,20 @@ export default function TeamScheduleClient({ team, games, fetchError = false }) 
     if (selectedMonth === "playoff") {
       return games.filter((g) => isPlayoff(g.gameId));
     }
+    if (selectedMonth === "preseason") {
+      return games.filter((g) => isPreseason(g.gameId));
+    }
     return games.filter(
-      (g) => !isPlayoff(g.gameId) && getJSTYearMonth(g.gameDateTimeUTC) === selectedMonth
+      (g) =>
+        !isPlayoff(g.gameId) &&
+        !isPreseason(g.gameId) &&
+        getJSTYearMonth(g.gameDateTimeUTC) === selectedMonth
     );
   }, [games, selectedMonth]);
 
-  // 未消化の試合（カレンダー追加用）
+  // 未消化の試合（一括カレンダー追加用）。プレシーズンは含めない
   const upcomingGames = useMemo(
-    () => filteredGames.filter((g) => g.gameStatus !== 3),
+    () => filteredGames.filter((g) => g.gameStatus !== 3 && !isPreseason(g.gameId)),
     [filteredGames]
   );
 
