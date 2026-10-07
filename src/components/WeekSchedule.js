@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getLogoUrl, getTeamById } from "@/lib/teams";
 import { formatJSTTime, isPlayoff, isPreseason, isTBD, formatJSTDateTBD } from "@/lib/utils";
 import CalendarButtons from "./CalendarButtons";
+import Countdown from "./Countdown";
 import styles from "./WeekSchedule.module.css";
 
 const DAY_JA = ["日", "月", "火", "水", "木", "金", "土"];
@@ -21,8 +22,8 @@ export default function WeekSchedule({ grouped, todayKey }) {
   return (
     <div className="container">
       <div className={styles.header}>
-        <h1 className={styles.title}>週間日程</h1>
-        <p className={styles.sub}>前後1週間 · 全チーム · 日本時間</p>
+        <h1 className={styles.title}>📆 <span className="hype-text">週間日程</span></h1>
+        <p className={styles.sub}>前後1週間の全試合を日本時間で一気見👀</p>
       </div>
 
       <div className={styles.timeline}>
@@ -35,8 +36,8 @@ export default function WeekSchedule({ grouped, todayKey }) {
             <section key={key} className={styles.dayBlock} id={key}>
               <div className={`${styles.dateHeader} ${isToday ? styles.today : ""} ${isWeekend ? styles.weekend : ""}`}>
                 <span className={styles.dateLabel}>{label}</span>
-                {isToday && <span className={styles.todayBadge}>TODAY</span>}
-                <span className={styles.gameCount}>{games.length}試合</span>
+                {isToday && <span className={styles.todayBadge}>🔥 TODAY</span>}
+                <span className={styles.gameCount}>🏀×{games.length}</span>
               </div>
 
               <div className={styles.gameGrid}>
@@ -49,7 +50,7 @@ export default function WeekSchedule({ grouped, todayKey }) {
         })}
 
         {dateKeys.length === 0 && (
-          <p className={styles.empty}>この期間に試合はありません</p>
+          <p className={styles.empty}>😴 この期間は試合なし…</p>
         )}
       </div>
     </div>
@@ -66,8 +67,8 @@ function WeekGameCard({ game }) {
 
   return (
     <div className={`${styles.gameCard} ${isLive ? styles.liveCard : ""}`}>
-      {playoff && <span className={styles.playoffBadge}>PO</span>}
-      {isPreseason(game.gameId) && <span className={`${styles.playoffBadge} ${styles.preseasonBadge}`}>PRE</span>}
+      {playoff && <span className={styles.playoffBadge}>🏆 PO</span>}
+      {isPreseason(game.gameId) && <span className={`${styles.playoffBadge} ${styles.preseasonBadge}`}>🧪 PRE</span>}
       {isLive && <span className={styles.liveDot} />}
 
       <p className={`${styles.gameTime} ${tbd ? styles.tbdTime : ""}`}>
@@ -75,6 +76,7 @@ function WeekGameCard({ game }) {
           ? <>{formatJSTDateTBD(game.gameDateTimeUTC)}<br />時間未定</>
           : formatJSTTime(game.gameDateTimeUTC)
         }
+        {!tbd && game.gameStatus === 1 && <Countdown utc={game.gameDateTimeUTC} />}
       </p>
 
       <div className={styles.teams}>
@@ -82,7 +84,7 @@ function WeekGameCard({ game }) {
         <span className={styles.separator}>
           {isFinished
             ? <span className={styles.scoreInline}>{game.awayTeam.score}–{game.homeTeam.score}</span>
-            : <span className={styles.vsText}>@</span>
+            : <span className={styles.vsText}>VS</span>
           }
         </span>
         <TeamChip team={game.homeTeam} info={homeInfo} isWinner={isFinished && game.homeTeam.score > game.awayTeam.score} right />
@@ -105,7 +107,10 @@ function TeamChip({ team, info, isWinner, right }) {
   const tricode = info?.tricode || team.teamTricode;
 
   const inner = (
-    <div className={`${styles.teamChip} ${right ? styles.teamChipRight : ""} ${isWinner ? styles.winner : ""}`}>
+    <div
+      className={`${styles.teamChip} ${right ? styles.teamChipRight : ""} ${isWinner ? styles.winner : ""}`}
+      style={{ "--team-color": info?.primaryColor }}
+    >
       {logoUrl && (
         <Image src={logoUrl} alt={tricode} width={28} height={28} style={{ objectFit: "contain" }} />
       )}

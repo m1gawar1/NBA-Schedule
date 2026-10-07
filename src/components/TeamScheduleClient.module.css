@@ -1,57 +1,74 @@
+/* チームカラーのグラデで染めたヘッダー */
 .header {
-  padding: 2.5rem 0 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid var(--border-dim);
+  margin: 2rem 0 1.75rem;
+  padding: 1.75rem;
+  border-radius: calc(var(--radius) + 8px);
+  border: 3px solid var(--text);
+  background:
+    radial-gradient(circle at 15% 50%, color-mix(in srgb, var(--team-color, var(--accent)) 75%, transparent) 0%, transparent 60%),
+    linear-gradient(120deg, color-mix(in srgb, var(--team-color, var(--accent)) 35%, var(--bg-card)), var(--bg-card));
+  box-shadow: 0 8px 0 var(--text);
+  overflow: hidden;
 }
 
 .headerInner {
   display: flex;
-  align-items: flex-start;
-  gap: 2rem;
+  align-items: center;
+  gap: 1.75rem;
 }
 
 .logoWrap {
   flex-shrink: 0;
   padding: 0.75rem;
-  background: var(--bg-card);
-  border: 2px solid var(--border-dim);
+  border-radius: 50%;
+  background: color-mix(in srgb, #fff 85%, transparent);
+  border: 3px solid var(--text);
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-8px) rotate(4deg); }
 }
 
 .teamMeta {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  padding-top: 0.25rem;
+  gap: 0.2rem;
 }
 
 .teamCity {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.5;
 }
 
 .teamName {
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.6rem);
   color: var(--text);
-  text-transform: uppercase;
-  line-height: 1;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-shadow: 3px 3px 0 var(--team-color, var(--accent));
 }
 
 .tricode {
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--team-color, var(--accent));
-  letter-spacing: 0.15em;
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1.5;
+  color: #fff;
+  background: var(--team-color, var(--accent));
+  border: 2px solid var(--text);
+  padding: 0 0.7rem;
+  border-radius: 99px;
 }
 
 .actions {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
@@ -59,9 +76,9 @@
 
 .bulkButtons {
   background: var(--bg-raised);
-  border: 2px solid var(--border-dim);
-  border-left: 4px solid var(--accent-ok);
-  padding: 0.9rem 1.1rem;
+  border: 3px dashed var(--accent-ok);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -70,19 +87,25 @@
 }
 
 .bulkLabel {
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--text);
 }
 
 .bulkLabel strong {
-  color: var(--text);
-  font-weight: 700;
+  color: var(--accent-ok);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 
+/* バッジが上にはみ出すので間隔広め */
 .gameList {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
+  padding-top: 0.75rem;
   margin-bottom: 4rem;
 }
 
@@ -90,11 +113,13 @@
   color: var(--text-muted);
   padding: 2.5rem 0;
   text-align: center;
-  font-size: 0.88rem;
-  font-style: italic;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.8;
 }
 
 @media (max-width: 500px) {
+  .header { padding: 1.25rem; }
   .headerInner { gap: 1rem; }
   .logoWrap img { width: 72px !important; height: 72px !important; }
 }

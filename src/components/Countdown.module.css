@@ -1,0 +1,30 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.1rem 0.65rem;
+  border-radius: 99px;
+  background: var(--accent-alt);
+  color: #1A1A1A;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* 1時間以内はプルプル震えて急かす */
+.soon {
+  background: var(--accent);
+  color: #fff;
+  animation: shake 0.9s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  20%      { transform: rotate(-4deg); }
+  40%      { transform: rotate(4deg); }
+  60%      { transform: rotate(-2deg); }
+  80%      { transform: rotate(2deg); }
+}

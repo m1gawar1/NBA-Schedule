@@ -69,7 +69,7 @@
 .dateToday { border-color: var(--accent) !important; }
 
 .dateText {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -97,7 +97,7 @@
   background: transparent;
   border: 2px solid var(--accent);
   color: var(--accent);
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -142,7 +142,7 @@
 .calNavBtn:hover { border-color: var(--accent); color: var(--accent); }
 
 .calMonthLabel {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--text);
@@ -157,7 +157,7 @@
 }
 
 .calDayName {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.6rem;
   font-weight: 700;
   color: var(--text-muted);
@@ -235,7 +235,7 @@
 .finishedCard { opacity: 0.7; }
 
 .liveBadge {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.55rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -245,7 +245,7 @@
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 .gameTime {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--accent);
@@ -260,7 +260,7 @@
 .colorDot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
 
 .tricode {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 900;
   color: var(--text);

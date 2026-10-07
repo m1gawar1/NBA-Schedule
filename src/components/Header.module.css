@@ -2,8 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg);
-  border-bottom: 2px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   transition: background 0.25s;
 }
 
@@ -11,7 +12,7 @@
   max-width: 1360px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 54px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,23 +23,33 @@
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
+  min-height: 44px;
 }
 
-.logoIcon { font-size: 1.25rem; }
+.logoIcon {
+  font-size: 1.6rem;
+  display: inline-block;
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30%      { transform: translateY(-7px) rotate(-12deg); }
+  55%      { transform: translateY(0) rotate(8deg); }
+}
 
 .logoText {
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.88rem;
-  font-weight: 900;
-  color: var(--text);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.6rem;
 }
 
 .nav {
@@ -47,30 +58,61 @@
 }
 
 .navLink {
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding: 0.3rem 0.7rem;
-  border: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text);
+  padding: 0 0.9rem;
+  border-radius: 99px;
+  border: 2px solid var(--border-dim);
+  transition: border-color 0.15s, transform 0.15s;
   white-space: nowrap;
 }
 
 .navLink:hover {
-  color: var(--text);
-  border-color: var(--border-dim);
+  border-color: var(--accent);
+  transform: scale(1.06) rotate(-2deg);
 }
 
-.navSample {
-  color: var(--accent-alt);
-  border-color: transparent;
-  opacity: 0.7;
+/* ─── テロップ ─── */
+.ticker {
+  overflow: hidden;
+  background: var(--grad-ticker);
+  background-size: 200% 100%;
+  animation: tickerBg 8s linear infinite;
+  border-block: 2px solid var(--text);
 }
 
-.navSample:hover {
-  border-color: var(--accent-alt);
-  opacity: 1;
+@keyframes tickerBg {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.tickerTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+/* 高さを固定（週間日程の日付見出しの sticky 位置 92px と合わせる） */
+.tickerItem {
+  padding: 0 2rem;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 28px;
+  color: #1A1A1A;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 500px) {
+  .inner { padding: 0 1rem; }
+  .logoText { font-size: 0.95rem; }
 }

@@ -2,39 +2,37 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.35rem 0.85rem;
-  border: 2px solid var(--border-dim);
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 0.7rem;
-  font-weight: 700;
-  font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border: 2px solid var(--text);
+  border-radius: 99px;
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 900;
+  font-family: var(--font-body);
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, transform 0.12s, box-shadow 0.12s, background 0.15s;
+  box-shadow: 0 4px 0 var(--text);
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s, background 0.15s;
 }
 
 .btn:hover {
-  border-color: var(--accent-alt);
-  color: var(--accent-alt);
-  transform: translate(-2px, -2px);
-  box-shadow: 3px 3px 0 var(--accent-alt);
+  transform: translateY(-2px) rotate(-3deg) scale(1.05);
 }
 
 .btn:active {
-  transform: translate(0, 0);
-  box-shadow: none;
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--text);
 }
 
+/* 登録済みはキラキラ */
 .active {
   background: var(--accent-alt);
-  border-color: var(--accent-alt);
-  color: #111;
+  color: #1A1A1A;
+  animation: sparkle 1.8s ease-in-out infinite;
 }
 
-.active:hover {
-  background: var(--accent-alt);
-  border-color: var(--accent-alt);
-  color: #111;
+@keyframes sparkle {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.25) drop-shadow(0 0 8px var(--accent-alt)); }
 }

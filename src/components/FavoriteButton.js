@@ -39,7 +39,7 @@ export default function FavoriteButton({ slug }) {
       aria-label={isFav ? "お気に入りから削除" : "お気に入りに追加"}
       title={isFav ? "お気に入りから削除" : "お気に入りに追加"}
     >
-      {isFav ? "★" : "☆"} {isFav ? "お気に入り済み" : "お気に入り"}
+      {isFav ? "⭐ 推し登録済み" : "☆ 推しにする"}
     </button>
   );
 }

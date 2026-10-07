@@ -66,8 +66,9 @@ export default function HomeClient({ initialGames, initialDate }) {
     <div className="container">
       {/* Header */}
       <div className={styles.header}>
-        <h1 className={styles.title}>NBA Tip-Off Time</h1>
-        <p className={styles.subtitle}>全試合日程を日本時間で確認</p>
+        <p className={styles.eyebrow}>🔥 推しの試合、見逃すな 🔥</p>
+        <h1 className={`${styles.title} hype-text`}>NBA Tip-Off Time</h1>
+        <p className={styles.subtitle}>全試合の日程を <strong>日本時間</strong> で秒速チェック⚡</p>
       </div>
 
       {/* Date navigation controls */}
@@ -97,14 +98,14 @@ export default function HomeClient({ initialGames, initialDate }) {
       {/* 今日に戻る */}
       {!isToday && (
         <div className={styles.todayRow}>
-          <button className={styles.todayBtn} onClick={goToday}>今日に戻る</button>
+          <button className={styles.todayBtn} onClick={goToday}>👈 今日に戻る</button>
         </div>
       )}
 
       {/* Game grid */}
       <div className={`${styles.gamesArea} ${loading ? styles.loading : ""}`}>
         {games.length === 0 ? (
-          <p className={styles.empty}>この日は試合がありません</p>
+          <p className={styles.empty}>😴 この日は試合なし…<br />矢印で別の日をチェックしよ👉</p>
         ) : (
           <div className={styles.gameGrid}>
             {games.map(game => <GameCard key={game.gameId} game={game} />)}
@@ -117,13 +118,13 @@ export default function HomeClient({ initialGames, initialDate }) {
 
       {/* Team grids */}
       <section className={styles.conferenceSection}>
-        <h2 className="section-heading">Western Conference</h2>
+        <h2 className="section-heading">🤠 Western Conference</h2>
         <div className="team-grid">
           {WEST_TEAMS.map(team => <TeamCard key={team.teamId} team={team} />)}
         </div>
       </section>
       <section className={styles.conferenceSection}>
-        <h2 className="section-heading">Eastern Conference</h2>
+        <h2 className="section-heading">🗽 Eastern Conference</h2>
         <div className="team-grid">
           {EAST_TEAMS.map(team => <TeamCard key={team.teamId} team={team} />)}
         </div>

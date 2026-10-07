@@ -1,37 +1,64 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Orbitron:wght@700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap");
 
-/* ─── Dark Theme（デフォルト） ─── */
+/* ─── ドパガキ Dark（デフォルト）：ネオン × 深い紫 ─── */
 :root {
-  --bg:          #0D0E1A;
-  --bg-card:     #14152A;
-  --bg-raised:   #1C1D35;
-  --text:        #F0EEF8;
-  --text-muted:  #6B6C85;
-  --border:      #F0EEF8;
-  --border-dim:  #2E2F50;
-  --shadow:      #FF5C2E;
-  --accent:      #FF5C2E;
-  --accent-alt:  #FFE14D;
-  --accent-ok:   #2BFFB1;
-  --accent-info: #5B8CFF;
-  --ink:         #F0EEF8;
+  --font-display: "Dela Gothic One", "M PLUS Rounded 1c", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --font-body:    "M PLUS Rounded 1c", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+
+  --bg:          #12001F;
+  --bg-card:     #1F0A36;
+  --bg-raised:   #2B1048;
+  --text:        #FFF6FD;
+  --text-muted:  #B9A3D6;
+  --border:      #FF2E9A;
+  --border-dim:  #4A2370;
+  --shadow:      #FF2E9A;
+  --accent:      #FF2E9A;
+  --accent-alt:  #FFE600;
+  --accent-ok:   #39FF88;
+  --accent-info: #00E5FF;
+  --ink:         #FFF6FD;
+
+  /* グラデーション・発光 */
+  --grad-hype:   linear-gradient(100deg, #FF2E9A 0%, #FFB800 35%, #39FF88 65%, #00E5FF 100%);
+  --grad-card:   linear-gradient(135deg, #FF2E9A, #7B2CFF 50%, #00E5FF);
+  --grad-loop:   linear-gradient(90deg, #FF2E9A, #FFB800, #39FF88, #00E5FF, #FF2E9A);
+  --grad-ticker: var(--grad-loop);
+  --glow:        0 0 18px rgba(255, 46, 154, 0.55), 0 0 42px rgba(123, 44, 255, 0.35);
+  --glow-soft:   0 0 12px rgba(0, 229, 255, 0.35);
+  --radius:      20px;
+  --radius-sm:   12px;
+  --blob-1:      rgba(255, 46, 154, 0.28);
+  --blob-2:      rgba(0, 229, 255, 0.20);
+  --blob-3:      rgba(123, 44, 255, 0.30);
 }
 
-/* ─── Light Theme ─── */
+/* ─── ドパガキ Light：パステル × ビビッド ─── */
 [data-theme="light"] {
-  --bg:          #F4EFE6;
+  --bg:          #FFF2FA;
   --bg-card:     #FFFFFF;
-  --bg-raised:   #EAE5DC;
-  --text:        #111111;
-  --text-muted:  #777777;
-  --border:      #111111;
-  --border-dim:  #CCCCCC;
-  --shadow:      #111111;
-  --accent:      #E8341A;
-  --accent-alt:  #1A47CC;
-  --accent-ok:   #00915E;
-  --accent-info: #1A47CC;
-  --ink:         #111111;
+  --bg-raised:   #FFE3F3;
+  --text:        #1A1A1A;
+  --text-muted:  #6E5A7E;
+  --border:      #FF1F8E;
+  --border-dim:  #F3C6E2;
+  --shadow:      #7B2CFF;
+  --accent:      #FF1F8E;
+  --accent-alt:  #7B2CFF;
+  --accent-ok:   #00A653;
+  --accent-info: #0077E6;
+  --ink:         #1A1A1A;
+
+  --grad-hype:   linear-gradient(100deg, #FF1F8E 0%, #FF8A00 35%, #7B2CFF 70%, #0091FF 100%);
+  --grad-card:   linear-gradient(135deg, #FF1F8E, #7B2CFF 50%, #00C2FF);
+  --grad-loop:   linear-gradient(90deg, #FF1F8E, #FF8A00, #7B2CFF, #0091FF, #FF1F8E);
+  /* テロップは黒文字が読めるようにパステル */
+  --grad-ticker: linear-gradient(90deg, #FFB3D9, #FFE08A, #C9B3FF, #A8E6FF, #FFB3D9);
+  --glow:        0 6px 0 rgba(123, 44, 255, 0.85);
+  --glow-soft:   0 4px 14px rgba(255, 31, 142, 0.18);
+  --blob-1:      rgba(255, 31, 142, 0.14);
+  --blob-2:      rgba(0, 194, 255, 0.14);
+  --blob-3:      rgba(255, 230, 0, 0.22);
 }
 
 /* ─── Reset ─── */
@@ -44,29 +71,52 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  /* Dela Gothic One は太さ1種類のみ。疑似ボールドで潰れるのを防ぐ */
+  font-synthesis: none;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-  line-height: 1.65;
-  letter-spacing: 0.01em;
-  word-break: break-word;
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  word-break: break-all;
   overflow-wrap: break-word;
   line-break: strict;
   min-height: 100svh;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   transition: background 0.25s ease, color 0.25s ease;
+  position: relative;
+}
+
+/* 背景のネオンぼかし（ゆっくり動く） */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20vmax;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(35vmax 35vmax at 15% 20%, var(--blob-1), transparent 70%),
+    radial-gradient(30vmax 30vmax at 85% 30%, var(--blob-2), transparent 70%),
+    radial-gradient(40vmax 40vmax at 50% 90%, var(--blob-3), transparent 70%);
+  animation: blobFloat 18s ease-in-out infinite alternate;
+}
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(4vmax, -3vmax) rotate(8deg); }
 }
 
 a { color: inherit; text-decoration: none; }
 
 /* ─── Scrollbar ─── */
-::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-dim); }
+::-webkit-scrollbar-thumb { background: var(--grad-card); border-radius: 99px; }
 
 /* ─── Layout ─── */
 .container {
@@ -75,25 +125,42 @@ a { color: inherit; text-decoration: none; }
   padding: 0 1.5rem;
 }
 
+/* ─── 虹色に流れるテキスト（見出し用） ─── */
+.hype-text {
+  background: var(--grad-loop);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hypeFlow 4s linear infinite;
+}
+
+@keyframes hypeFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
 /* ─── Section heading ─── */
 .section-heading {
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--text);
   margin-bottom: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
+  font-feature-settings: "palt" 1;
 }
 .section-heading::before {
   content: "";
   display: block;
-  width: 28px;
-  height: 3px;
-  background: var(--accent);
+  width: 36px;
+  height: 10px;
+  border-radius: 99px;
+  background: var(--grad-hype);
   flex-shrink: 0;
 }
 
@@ -101,7 +168,7 @@ a { color: inherit; text-decoration: none; }
 .team-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0.6rem;
+  gap: 0.8rem;
   margin-bottom: 1.5rem;
 }
 
@@ -109,5 +176,14 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 780px)  { .team-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 500px)  {
   .team-grid { grid-template-columns: repeat(2, 1fr); }
-  html { font-size: 14px; }
+  html { font-size: 15px; }
+  .container { padding: 0 1rem; }
+}
+
+/* ─── 動きを減らす設定の人にはアニメーションを止める ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

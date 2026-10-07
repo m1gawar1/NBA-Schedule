@@ -1,84 +1,109 @@
 /* TBD（時間未定）カード */
 .tbdCard {
   border-style: dashed !important;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .tbdBadge {
   display: inline-block;
   margin-left: 0.5rem;
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
   font-weight: 900;
-  letter-spacing: 0.1em;
   background: var(--border-dim);
-  color: var(--text-muted);
-  padding: 0.1rem 0.45rem;
+  color: var(--text);
+  padding: 0.05rem 0.6rem;
+  border-radius: 99px;
   vertical-align: middle;
 }
 
+/* ─── カード本体：グラデ枠＋押すとぷにっと縮む ─── */
 .card {
-  background: var(--bg-card);
-  border: 2px solid var(--border-dim);
-  padding: 1.1rem 1.25rem;
+  background:
+    linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+    var(--grad-card) border-box;
+  border: 3px solid transparent;
+  border-radius: var(--radius);
+  padding: 1.15rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.7rem;
   position: relative;
-  transition: border-color 0.15s, transform 0.12s, box-shadow 0.12s;
+  box-shadow: var(--glow-soft);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s;
 }
 
 .card:hover {
-  border-color: var(--border);
-  transform: translate(-3px, -3px);
-  box-shadow: 4px 4px 0 var(--shadow);
+  transform: translateY(-4px) scale(1.015) rotate(-0.4deg);
+  box-shadow: var(--glow);
 }
 
 .card:active {
-  transform: translate(0, 0);
-  box-shadow: none;
+  transform: scale(0.97);
 }
 
 .compact { padding: 0.9rem 1rem; gap: 0.5rem; }
 
+/* ライブ中はカード全体が脈打つ */
+.liveCard {
+  animation: liveGlow 1.4s ease-in-out infinite;
+}
+
+@keyframes liveGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 46, 154, 0.0), var(--glow-soft); }
+  50%      { box-shadow: 0 0 0 6px rgba(255, 46, 154, 0.35), var(--glow); }
+}
+
 .playoffBadge {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -12px;
+  right: 14px;
   background: var(--accent);
   color: #fff;
-  font-size: 0.55rem;
-  font-family: "Orbitron", sans-serif;
+  font-size: 0.68rem;
+  font-family: var(--font-body);
   font-weight: 900;
-  letter-spacing: 0.12em;
-  padding: 0.18rem 0.55rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.7rem;
+  border-radius: 99px;
+  border: 2px solid var(--text);
+  transform: rotate(3deg);
 }
 
 .liveBadge {
   position: absolute;
-  top: 0;
-  right: 0;
-  background: #D0230F;
+  top: -12px;
+  left: 14px;
+  background: #FF1F1F;
   color: #fff;
-  font-size: 0.55rem;
-  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-family: var(--font-body);
   font-weight: 900;
-  letter-spacing: 0.12em;
-  padding: 0.18rem 0.55rem;
-  animation: pulse 1.2s infinite;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  padding: 0.1rem 0.7rem;
+  border-radius: 99px;
+  border: 2px solid var(--text);
+  animation: pulse 0.9s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.35; }
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50%      { transform: scale(1.12) rotate(-3deg); }
 }
 
 .datetime {
-  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.82rem;
   color: var(--accent);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  font-family: var(--font-body);
 }
 
 .matchup {
@@ -91,7 +116,7 @@
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
   min-width: 0;
 }
 
@@ -99,35 +124,53 @@
 .homeTeam  { flex-direction: row-reverse; text-align: right; }
 .homeTeam .teamInfo { align-items: flex-end; }
 
-.teamLogo { flex-shrink: 0; }
+/* ロゴはチームカラーの円の上に乗せる */
+.teamLogo {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--team-color, var(--accent)) 45%, transparent) 0%, transparent 70%);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 .teamLogo img { object-fit: contain; }
+
+.card:hover .teamLogo { transform: rotate(-8deg) scale(1.1); }
 
 .teamInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.1rem;
   min-width: 0;
 }
 
 .teamName {
-  font-family: "Orbitron", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
   color: var(--text);
   text-decoration: none;
-  line-height: 1;
-  letter-spacing: 0.04em;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   transition: color 0.15s;
 }
 
 .teamName:hover { color: var(--accent); }
 
+.winner .teamName {
+  color: var(--accent-ok);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent-ok) 60%, transparent);
+}
+
 .homeAwayLabel {
-  font-size: 0.58rem;
-  font-family: "Orbitron", sans-serif;
+  font-size: 0.68rem;
+  font-family: var(--font-body);
+  font-weight: 800;
   color: var(--text-muted);
-  letter-spacing: 0.1em;
+  line-height: 1.5;
   white-space: nowrap;
 }
 
@@ -135,32 +178,63 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 60px;
+  min-width: 92px;
+  padding: 0 0.25rem;
   flex-shrink: 0;
 }
 
 .atSign {
-  font-family: "Orbitron", sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  background: var(--grad-hype);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .score {
-  font-family: "Orbitron", sans-serif;
-  font-size: 1rem;
-  font-weight: 900;
-  color: var(--text);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text-muted);
   white-space: nowrap;
-  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.scoreSep { font-size: 0.8rem; }
+
+.winScore {
+  color: var(--accent-ok);
+  font-size: 1.35rem;
 }
 
 .arena {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.arena::before {
+  content: "📍 ";
 }
 
 /* プレシーズンはプレーオフより控えめな色にする */
 .preseasonBadge {
-  background: #6b7280;
+  background: var(--accent-info);
+  color: #1A1A1A;
+  transform: rotate(-3deg);
+}
+
+/* スマホでは対戦行を詰めて横はみ出しを防ぐ */
+@media (max-width: 500px) {
+  .card { padding: 1rem 0.9rem; }
+  .teamLogo { width: 40px; height: 40px; }
+  .teamLogo img { width: 32px; height: 32px; }
+  .teamName { font-size: 1.05rem; }
+  .vs { min-width: 72px; }
+  .score { font-size: 0.95rem; }
+  .winScore { font-size: 1.15rem; }
 }

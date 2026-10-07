@@ -92,7 +92,7 @@ export default function TeamScheduleClient({ team, games, fetchError = false }) 
       {upcomingGames.length > 0 && (
         <div className={styles.bulkButtons}>
           <p className={styles.bulkLabel}>
-            未消化試合 <strong>{upcomingGames.length}件</strong> を一括追加:
+            📥 残り <strong>{upcomingGames.length}</strong> 試合をまとめてカレンダーへ:
           </p>
           <CalendarButtons games={upcomingGames} label={true} fileName={icsFileName} />
         </div>
