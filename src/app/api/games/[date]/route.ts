@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchNBASchedule } from "@/lib/nba-data";
-import { getEffectiveDateKey } from "@/lib/utils";
+import { fetchGamesByDate } from "@/lib/nba-data";
 
 export async function GET(
   _request: Request,
@@ -11,14 +10,10 @@ export async function GET(
     return NextResponse.json({ error: "Invalid date" }, { status: 400 });
   }
 
-  const allGames = await fetchNBASchedule();
-  const games = allGames
-    .filter((g) => getEffectiveDateKey(g) === date)
-    .sort(
-      (a, b) =>
-        new Date(a.gameDateTimeUTC).getTime() -
-        new Date(b.gameDateTimeUTC).getTime()
-    );
-
-  return NextResponse.json({ date, games });
+  try {
+    const games = await fetchGamesByDate(date);
+    return NextResponse.json({ date, games });
+  } catch {
+    return NextResponse.json({ error: "Failed to fetch games" }, { status: 502 });
+  }
 }

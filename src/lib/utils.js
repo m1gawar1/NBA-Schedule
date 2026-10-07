@@ -124,3 +124,13 @@ export function getEffectiveDateKey(game) {
   const jst = new Date(shifted.getTime() + 9 * 60 * 60 * 1000);
   return jst.toISOString().slice(0, 10);
 }
+
+/**
+ * 試合日（JST）からシーズン表記を返す（例: "2026-27"）
+ * 7月以降はその年に始まるシーズンとして扱う
+ */
+export function getSeasonLabel(utcDateString) {
+  const jst = new Date(new Date(utcDateString).getTime() + 9 * 60 * 60 * 1000);
+  const y = jst.getUTCMonth() + 1 >= 7 ? jst.getUTCFullYear() : jst.getUTCFullYear() - 1;
+  return `${y}-${String(y + 1).slice(2)}`;
+}

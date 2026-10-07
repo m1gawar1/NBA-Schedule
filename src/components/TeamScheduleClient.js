@@ -10,7 +10,7 @@ import CalendarButtons from "./CalendarButtons";
 import FavoriteButton from "./FavoriteButton";
 import styles from "./TeamScheduleClient.module.css";
 
-export default function TeamScheduleClient({ team, games }) {
+export default function TeamScheduleClient({ team, games, fetchError = false }) {
   const [selectedMonth, setSelectedMonth] = useState("all");
 
   // 利用可能な月リストを生成
@@ -88,7 +88,9 @@ export default function TeamScheduleClient({ team, games }) {
       />
 
       {/* 試合リスト */}
-      {filteredGames.length === 0 ? (
+      {fetchError ? (
+        <p className={styles.empty}>日程データを取得できませんでした。時間をおいて再度お試しください</p>
+      ) : filteredGames.length === 0 ? (
         <p className={styles.empty}>該当する試合がありません</p>
       ) : (
         <div className={styles.gameList}>

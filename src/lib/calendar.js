@@ -1,3 +1,5 @@
+import { getSeasonLabel } from "@/lib/utils";
+
 /**
  * Google Calendar イベント追加URL を生成（OAuth不要）
  */
@@ -9,7 +11,7 @@ export function buildGoogleCalendarUrl(game) {
     d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 
   const isPlayoff = game.gameId.startsWith("004");
-  const label = isPlayoff ? "NBA プレーオフ" : "NBA 2025-26 シーズン";
+  const label = isPlayoff ? "NBA プレーオフ" : `NBA ${getSeasonLabel(game.gameDateTimeUTC)} シーズン`;
 
   const params = new URLSearchParams({
     action: "TEMPLATE",
@@ -37,7 +39,7 @@ export function buildICSContent(games) {
       const start = new Date(game.gameDateTimeUTC);
       const end = new Date(start.getTime() + 2.5 * 60 * 60 * 1000);
       const isPlayoff = game.gameId.startsWith("004");
-      const label = isPlayoff ? "NBA プレーオフ" : "NBA 2025-26 シーズン";
+      const label = isPlayoff ? "NBA プレーオフ" : `NBA ${getSeasonLabel(game.gameDateTimeUTC)} シーズン`;
       const summary = `${game.awayTeam.teamCity} ${game.awayTeam.teamName} @ ${game.homeTeam.teamCity} ${game.homeTeam.teamName}`;
       const location = `${game.arenaName}, ${game.arenaCity}`;
       const uid = `${game.gameId}@nba-tipoff-time`;

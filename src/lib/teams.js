@@ -52,6 +52,24 @@ export function getTeamById(teamId) {
   return NBA_TEAMS.find((t) => t.teamId === teamId) || null;
 }
 
+// ESPN の略称が NBA の tricode と異なるチームの対応表（それ以外は同じ）
+const ESPN_ABBR_BY_TRICODE = {
+  GSW: "GS",
+  NYK: "NY",
+  NOP: "NO",
+  SAS: "SA",
+  UTA: "UTAH",
+  WAS: "WSH",
+};
+
+export function getEspnAbbr(team) {
+  return ESPN_ABBR_BY_TRICODE[team.tricode] || team.tricode;
+}
+
+export function getTeamByEspnAbbr(abbr) {
+  return NBA_TEAMS.find((t) => getEspnAbbr(t) === abbr) || null;
+}
+
 export function getLogoUrl(teamId) {
   return `https://cdn.nba.com/logos/nba/${teamId}/primary/L/logo.svg`;
 }
